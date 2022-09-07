@@ -1,0 +1,12 @@
+INSERT INTO friends(~) VALUES ("?"); 
+CREATE TABLE IF NOT EXISTS friends2 AS SELECT * FROM (SELECT * FROM (SELECT ROW_NUMBER() OVER(ORDER BY CASE WHEN rowid IS NULL THEN 1 ELSE 0 END) AS rownumber,* FROM friends) as t1 INNER JOIN (SELECT ROW_NUMBER() OVER(ORDER BY CASE WHEN ~ IS NULL THEN 1 ELSE 0 END) AS rownumber2,~ AS ~2 FROM friends) as t2 ON t1.rownumber = t2.rownumber2);
+UPDATE friends2 SET ~=~2;
+ALTER TABLE friends2 DROP COLUMN ~2;
+ALTER TABLE friends2 DROP COLUMN rownumber;
+ALTER TABLE friends2 DROP COLUMN rownumber2;
+DELETE FROM friends;
+INSERT INTO friends SELECT * FROM friends2;
+DROP TABLE friends2;
+UPDATE friends SET ~ = NULL WHERE EXISTS (SELECT * FROM friends AS t2 WHERE friends.~ = t2.~ and friends.rowid > t2.rowid);
+DELETE FROM friends WHERE ~ IS NULL AND rowid = (SELECT MAX(rowid) FROM friends);
+UPDATE sqlite_sequence SET seq = (SELECT MAX(rowid) FROM friends) WHERE name="friends";

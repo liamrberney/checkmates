@@ -1,0 +1,130 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>CheckMates - Settings</title>
+  <link rel='stylesheet' href="{% static 'checkmates/css/bootstrap.min.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'checkmates/mainstyle2.css' %}">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+
+<body>
+  <!-- partial:index.partial.html -->
+
+  <body>
+
+    <div class="tbg">
+
+      <div class="card text-center">
+        <div class="card-header">
+          <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="/main/">
+                <img src="../../static/checkmates/backbutton.png" alt="" width="24" height="24"
+                  class="d-inline-block align-text-top">
+                Match History
+              </a>
+              <!--<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                      <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item dropdown">
+                          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fa fa-cog" aria-hidden="true"></i>
+                          </a>
+                          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="/profile/">Profile</a></li>
+                            <li><a class="dropdown-item" href="#">Game Preferences</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#">Font Size Toggle</a></li>
+                          </ul>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link active" aria-current="page" href="#"></a>
+                        </li>
+                        <li class="nav-item dropdown">
+                          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fa fa-comments" aria-hidden="true"></i>
+                          </a>
+                          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#">Match History</a></li>
+                            <li><a class="dropdown-item" href="#">Mates</a></li>
+  
+                          </ul>
+                        </li>
+                      </ul>
+                    </div>-->
+            </div>
+          </nav>
+        </div>
+        <div class="card-body">
+          <div class="card-body">
+            <h5 class="card-title headerfontsizetoggle">Match History</h5>
+            <p class="card-text fontsizetoggle">Win/Loss/Draw History of Previously played games</p>
+
+          </div>
+          <ul class="list-group list-group-flush ">
+
+            {% for match in history %}
+
+
+            <li class="list-group-item">
+
+              <div class="card mb-3" style="max-width: 540px;">
+                <div class="row g-0">
+                  <div class="col-md-4">
+                    <a><img src=" {{ match.1 }} " class="img-fluid rounded-start" alt="..."></a>
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body">
+                      <h5 class="card-title headerfontsizetoggle">{{ match.0 }}</h5>
+                      <p class="card-text">
+                      <div class="d-grid gap-2 ">
+                        {% if match.2 == "W" %}
+                        <button type="button" class="btn btn-success headerfontsizetoggle">
+                          {% elif match.2 == "L" %}
+                          <button type="button" class="btn btn-danger headerfontsizetoggle">
+                            {% elif match.2 == "D" %}
+                            <button type="button" class="btn btn-secondary headerfontsizetoggle">
+
+                              {% endif %}
+                              {% if match.2 == "W" %}
+                              Match Won
+                              {% elif match.2 == "L" %}
+                              Match Lost
+                              {% elif match.2 == "D" %}
+                              Match Draw
+                              {% endif %}
+                            </button>
+                      </div>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </li>
+
+            {% endfor %}
+          </ul>
+          <div class="card-body">
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <body>
+      <!-- partial -->
+      <script src='https://use.fontawesome.com/faffa271ef.js'></script>
+      <script src="{% static 'checkmates/script.js' %}"></script>
+      <script src='https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js'></script>
+      <script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/js/bootstrap.min.js'></script>
+      <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
+    </body>
+
+</html>

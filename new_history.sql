@@ -1,0 +1,12 @@
+INSERT INTO history(~) VALUES ("%,?,&"); 
+CREATE TABLE IF NOT EXISTS history2 AS SELECT * FROM (SELECT * FROM (SELECT ROW_NUMBER() OVER(ORDER BY CASE WHEN rowid IS NULL THEN 1 ELSE 0 END) AS rownumber,* FROM history) as t1 INNER JOIN (SELECT ROW_NUMBER() OVER(ORDER BY CASE WHEN ~ IS NULL THEN 1 ELSE 0 END) AS rownumber2,~ AS ~2 FROM history) as t2 ON t1.rownumber = t2.rownumber2);
+UPDATE history2 SET ~=~2;
+ALTER TABLE history2 DROP COLUMN ~2;
+ALTER TABLE history2 DROP COLUMN rownumber;
+ALTER TABLE history2 DROP COLUMN rownumber2;
+DELETE FROM history;
+INSERT INTO history SELECT * FROM history2;
+DROP TABLE history2;
+UPDATE history SET ~ = NULL WHERE EXISTS (SELECT * FROM history AS t2 WHERE history.~ = t2.~ and history.rowid > t2.rowid);
+DELETE FROM history WHERE ~ IS NULL AND rowid = (SELECT MAX(rowid) FROM history);
+UPDATE sqlite_sequence SET seq = (SELECT MAX(rowid) FROM history) WHERE name="history";

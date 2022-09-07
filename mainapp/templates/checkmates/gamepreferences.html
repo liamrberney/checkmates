@@ -1,0 +1,133 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>CheckMates - Edit Profile</title>
+  <link rel='stylesheet' href="{% static 'checkmates/css/bootstrap.min.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'checkmates/mainstyle2.css' %}">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link class="jsbin" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/base/jquery-ui.css" rel="stylesheet"
+    type="text/css" />
+  <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+  <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
+  <script src="../../static/checkmates/script.js"></script>
+  <meta charset=utf-8 />
+
+</head>
+
+<body>
+    <div class="tbg">
+
+      <div class="card text-center">
+        <div class="card-header">
+          <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="/main/">
+                <img src="../../static/checkmates/backbutton.png" alt="" width="24" height="24"
+                  class="d-inline-block align-text-top">
+                Game Preferences
+              </a>
+            </div>
+          </nav>
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">Game Preferences</h3>
+          <p class = "fs-5" >Different game types and preferences. If certain games types prefered, those with the same preferences will be prioritized when searching for a match.</p>
+          <h5 class="card-title">Chess Variants</h5>
+      
+
+      
+          <form method="post" action = "">
+            {% csrf_token %}
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="ChessVariant" id="ChessVariant1" value="Classic" {% if ChessVariant == "Classic" or ChessVariant == ""%}checked="checked"{% endif %}>
+              <label class="form-check-label" for="ChessVariant1">
+              Classic
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="ChessVariant" id="ChessVariant2" value="Chess 960" {% if ChessVariant == "Chess 960" %}checked="checked"{% endif %}>
+            <label class="form-check-label" for="ChessVariant2">
+              Chess 960
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="ChessVariant" id="ChessVariant3" value="King of the Hill" {% if ChessVariant == "King of the Hill" %}checked="checked"{% endif %}>
+            <label class="form-check-label" for="ChessVariant3">
+              King of the Hill
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="ChessVariant" id="ChessVariant4" value="3 Check" {% if ChessVariant == "3 Check" %}checked="checked"{% endif %}>
+            <label class="form-check-label" for="ChessVariant4">
+              3 Check
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="ChessVariant" id="ChessVariant5" value="Racing Kings" {% if ChessVariant == "Racing Kings" %}checked="checked"{% endif %}>
+            <label class="form-check-label" for="ChessVariant4">
+              Racing Kings
+            </label> 
+          </div>
+
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="ChessVariant" id="ChessVariant5" value="Chaturanga" {% if ChessVariant == "Chaturanga" %}checked="checked"{% endif %}>
+            <label class="form-check-label" for="ChessVariant5">
+              Chaturanga
+            </label>
+          </div>
+
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="ChessVariant" id="ChessVariant6" value="Shogi" {% if ChessVariant == "Shogi" %}checked="checked"{% endif %}>
+            <label class="form-check-label" for="ChessVariant6">
+              Shogi
+            </label>
+          </div>
+
+          <h5 class="card-title">Time Preferences</h5>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="TimePreferences" id="TimePreferences1" value="Blitz" {% if TimePreferences == "Blitz"%}checked="checked"{% endif %}> 
+            <label class="form-check-label" for="TimePreferences1">
+              Blitz
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="TimePreferences" id="TimePreferences2" value="Rapid" {% if TimePreferences == "Rapid" %}checked="checked"{% endif %}>
+            <label class="form-check-label" for="TimePreferences2">
+              Rapid
+            </label>
+          </div>
+
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="TimePreferences" id="TimePreferences2" value="Classical" {% if TimePreferences == "Classical" %}checked="checked"{% endif %}>
+            <label class="form-check-label" for="TimePreferences3">
+              Classical
+            </label>
+          </div>
+
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="TimePreferences" id="TimePreferences2" value="Unlimited" {% if TimePreferences == "Unlimited" %}checked="checked"{% endif %}>
+            <label class="form-check-label" for="TimePreferences4">
+              Unlimited
+            </label>
+          </div>
+          
+          <div class="border-top pt-3">
+            <button class="btn btn-outline-info" type="submit">Save Preferences</button>
+          </div>
+        </form>
+        </div>
+      </div>
+
+    </div>
+      <!-- partial -->
+      <script src='https://use.fontawesome.com/faffa271ef.js'></script>
+      <script src='https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js'></script>
+      <script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/js/bootstrap.min.js'></script>
+      <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
+    </body>
+
+</html>

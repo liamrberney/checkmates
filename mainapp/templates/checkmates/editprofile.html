@@ -1,0 +1,126 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>CheckMates - Edit Profile</title>
+  <link rel='stylesheet' href="{% static 'checkmates/css/bootstrap.min.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'checkmates/mainstyle2.css' %}">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link class="jsbin" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/base/jquery-ui.css" rel="stylesheet"
+    type="text/css" />
+  <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+  <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
+  <script src="../../static/checkmates/script.js"></script>
+  <meta charset=utf-8 />
+
+</head>
+
+<body>
+  <style>
+    article,
+    aside,
+    figure,
+    footer,
+    header,
+    hgroup,
+    menu,
+    nav,
+    section {
+      display: block;
+    }
+  </style>
+  <!-- partial:index.partial.html -->
+
+  <body>
+
+    <div class="tbg">
+
+      <div class="card text-center">
+        <div class="card-header">
+          <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="/main/">
+                <img src="../../static/checkmates/backbutton.png" alt="" width="24" height="24"
+                  class="d-inline-block align-text-top">
+                Edit Profile
+              </a>
+
+            </div>
+          </nav>
+        </div>
+        <div class="card-body">
+
+          <div class="tphoto">
+            <input type='file' onchange="readURL(this);" />
+            <img id="blah" src="{{ pic }}" alt="your image" title="tphoto" />
+            <!--<img src="https://static01.nyt.com/images/2019/11/17/books/review/17Salam/Salam1-superJumbo.jpg" title="tphoto" alt="Tinder Photo" />-->
+          </div>
+          <div class="card-body">
+            <h5 id="fullname" class="card-title" contenteditable="true"> {{name}} </h5>
+            <p class="card-text"> Elo {{ELO}} </p>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Bio:</li>
+            <li id="bio" class="list-group-item" contenteditable="true">{{ bio }}
+            </li>
+            <li class="list-group-item">Contact Information</li>
+            Email:
+            <li id="email" contenteditable="true"> {{ email }} </li>
+            Phone Number:
+            <li id="phonenumber" contenteditable="true"> {{ phone }} </li>
+            <li class="list-group-item">
+              <input type="button" value="Save" onclick="saveEdits()" />
+            </li>
+          </ul>
+          <div class="card-body">
+          </div>
+        </div>
+      </div>
+      <li class="list-group-item">
+        <form method="POST">
+          {% csrf_token %}
+          <div class="mb-3">
+            <label for="LichessUsername" class="form-label">Lichess Username</label>
+            <input type="username" class="form-control" id="LichessUsername" name="LUsername"
+              aria-describedby="emailHelp">
+            <div id="emailHelp" class="form-text">Username For Lichess if you want to import ELO.</div>
+            <button type="submit" name="lichess" class="btn btn-primary">Submit</button>
+          </div>
+        </form>
+      </li>
+
+
+
+      <li class="list-group-item">
+        <form method="POST">
+          {% csrf_token %}
+          <div class="mb-3">
+            <label for="ChesscomUsername" class="form-label">Chess.com Username</label>
+            <input type="username" class="form-control" id="ChesscomUsername" name="CUsername"
+              aria-describedby="emailHelp">
+            <div id="emailHelp" class="form-text">Username For Chess.com if you want to import ELO.</div>
+            <button type="submit" name="chesscom" class="btn btn-primary">Submit</button>
+            <button type="submit" name="chesscomPic" class="btn btn-primary">Import Profile Picture</button>
+          </div>
+        </form>
+      </li>
+
+
+      </ul>
+
+
+      <form method="POST">
+    </div>
+
+    <body>
+      <!-- partial -->
+      <script src='https://use.fontawesome.com/faffa271ef.js'></script>
+      <script src='https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js'></script>
+      <script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/js/bootstrap.min.js'></script>
+      <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
+    </body>
+
+</html>

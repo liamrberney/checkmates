@@ -1,0 +1,284 @@
+﻿{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>CheckMates - Settings</title>
+  <link rel='stylesheet' href="{% static 'checkmates/css/bootstrap.min.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'checkmates/mainstyle2.css' %}">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+
+<body>
+  <form name="locateUsr" action="locateUsr" method="post">
+    {% csrf_token %}
+
+    <body onload="test()"></body>
+    <input type="hidden" id="location" name="lat-long" value="innerHTML" />
+  </form>
+  <!-- partial:index.partial.html -->
+
+  <body>
+
+    <div class="tbg">
+
+      <div class="card text-center">
+        <div class="card-header">
+          <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="#">
+                <img src="../../static/checkmates/queen.webp" alt="" width="18" height="24"
+                  class="d-inline-block align-text-top">
+                Checkmates
+              </a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse fontsizetoggle" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                      data-bs-toggle="dropdown" aria-expanded="false">
+                      <i class="fa fa-cog" aria-hidden="true"></i>
+                    </a>
+                    <ul class="dropdown-menu fontsizetoggle" aria-labelledby="navbarDropdown">
+                      <li><a class="dropdown-item" href="/editprofile/">Edit Profile</a></li>
+                      <li><a class="dropdown-item" href="/gamepreferences/">Game Preferences</a></li>
+                      <li><a class="dropdown-item" href="/logout/">Logout</a></li>
+                      <li>
+                        <hr class="dropdown-divider">
+                      </li>
+                      <li><a onclick="change()" class="dropdown-item" href="#">Font Size Toggle</a></li>
+                    </ul>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#"></a>
+                  </li>
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                      data-bs-toggle="dropdown" aria-expanded="false">
+                      <i class="fa fa-comments" aria-hidden="true"></i>
+                    </a>
+                    <ul class="dropdown-menu fontsizetoggle" aria-labelledby="navbarDropdown">
+                      <li><a class="dropdown-item" href="/matchhistory/">Match History</a></li>
+                      <li><a class="dropdown-item" href="/opengames/">Open Games</a></li>
+
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+        </div>
+
+        <div class="feedlist">
+
+
+
+
+
+          <!-- <div class="card-body fontsizetoggle">
+            <div class="tphoto">
+              <img src="https://static01.nyt.com/images/2019/11/17/books/review/17Salam/Salam1-superJumbo.jpg"
+                title="tphoto" alt="Tinder Photo" />
+            </div>
+            <div class="card-body">
+              
+              <h5 class="card-title headerfontsizetoggle"> {{ user.get_full_name }} </h5>
+              
+              <p class="card-text">Age 25, Elo 1000</p>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                <a href="#" class="card-link">No</a>
+                <a href="#" class="card-link">More Information</a>
+                <a href="#" class="card-link">Yes</a>
+              </li>
+              <li class="list-group-item" > Bio: Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae tempora,
+                eum voluptatum sequi, reprehenderit saepe voluptatibus aliquam voluptatem reiciendis, animi aspernatur
+                adipisci doloribus quas officia! Soluta ipsum quaerat obcaecati pariatur?
+              </li>
+              <li class="list-group-item">Other Information</li>
+            </ul>
+            <div class="card-body">
+            </div>
+          </div> -->
+
+
+          <script>
+            console.log("bruh")
+            let feed_array = []
+
+            fetch("/getfeed/").then((rsp) => {
+              return rsp.json()
+            }).then((data) => {
+              feed_array = data.array;
+              console.log(feed_array)
+              generator(feed_array)
+            })
+
+            let prof_root = document.getElementsByClassName("feedlist")[0]
+            let profiles = []
+
+            function replace_top() {
+
+              prof_root.removeChild(profiles.pop())
+              prof_root.appendChild(profiles[profiles.length - 1])
+            }
+
+
+
+            function generator(array) {
+
+
+              for (let i = 0; i < array.length; i++) {
+                let _username = array[i][0]
+                let _name = array[i][1]
+                let _img_url = array[i][2]
+                let _bios = array[i][3]
+                let _variant = array[i][5]
+                let _time_control = array[i][6]
+                let _ELO = array[i][7]
+                let _time = ""
+                console.log(_time_control)
+                switch (_time_control) {
+                  case 5:
+                    _time = "Blitz"
+                    break;
+                  case 15:
+                    _time = "Rapid"
+                    break;
+                  case 30:
+                    _time = "Classic"
+                    break;
+                  default:
+                    _time = "Unlimited"
+                    break;
+                }
+
+                cardbody = document.createElement("div")
+                cardbody.id = "top"
+                profiles.push(cardbody)
+                cardbody.className = "card-body fontsizetoggle"
+                tphoto = document.createElement("div")
+                tphoto.className = "tphoto"
+                img = document.createElement("img")
+                img.src = _img_url//"https://static01.nyt.com/images/2019/11/17/books/review/17Salam/Salam1-superJumbo.jpg"
+                img.title = "tphoto"
+                img.alt = "Tinder Photo"
+                tphoto.appendChild(img)
+                cardbody.appendChild(tphoto)
+                cardbody2 = document.createElement("div")
+                cardtitle = document.createElement("h5")
+                cardtitle.className = "card-title headerfontsizetoggle tts"
+                cardtitle.innerText = _name
+                cardbody2.appendChild(cardtitle)
+                cardtext = document.createElement("p")
+                cardtext.className = "card-text tts"
+                cardtext.innerText = "Elo: " + _ELO
+                cardbody2.appendChild(cardtext)
+                cardbody.appendChild(cardbody2)
+                listgroup = document.createElement("ul")
+                listgroup.className = "list-group list-group-flush"
+                lgitem = document.createElement("li")
+                lgitem.className = "list-group-item"
+
+                a1 = document.createElement("a")
+                // a1.href="#"
+                a1.className = "card-link"
+                a1.innerText = "No"
+                a1.onclick = () => {
+                  let username = array[i][0]
+                  console.log("clicked no on", username)
+                  fetch("/dislike/?username=" + username)
+                  replace_top()
+                }
+                lgitem.appendChild(a1)
+
+
+
+                a3 = document.createElement("a")
+                a3.className = "card-link"
+                a3.innerText = "Yes"
+                a3.onclick = () => {
+                  let username = array[i][0]
+                  console.log("clicked yes on ", username)
+                  fetch("/like/?username=" + username)
+                  replace_top()
+                }
+                lgitem.appendChild(a3)
+
+                listgroup.appendChild(lgitem)
+
+                ttsbtn = document.createElement("a")
+                ttsbtn.href = "#"
+                ttsbtn.className = "card-link"
+                ttsbtn.innerText = "🔊"
+                ttsbtn.onclick = function () { speak(); }
+                listgroup.appendChild(ttsbtn)
+
+                lgitem2 = document.createElement("li")
+                lgitem2.className = "list-group-item tts"
+                lgitem2.innerText = "Bio: " + _bios
+                listgroup.appendChild(lgitem2)
+
+                lgitem3 = document.createElement("li")
+                lgitem3.className = "list-group-item tts"
+                lgitem3.innerText = "Favorite Variant: " + _variant
+                listgroup.appendChild(lgitem3)
+
+                lgitem4 = document.createElement("li")
+                lgitem4.className = "list-group-item tts"
+                lgitem4.innerText = "Favorite Time Control: " + _time
+                listgroup.appendChild(lgitem4)
+
+
+                cardbody.appendChild(listgroup)
+
+
+
+
+
+
+              }
+              prof_root.appendChild(profiles[profiles.length - 1])
+
+            }
+
+          </script>
+
+
+
+
+
+
+
+
+
+        </div>
+
+
+
+      </div>
+
+    </div>
+
+  </body>
+  <!-- partial -->
+  <script src="{% static 'checkmates/js/location.js' %}"></script>
+  <script src="{% static 'checkmates/script.js' %}"></script>
+  <script src="{% static 'checkmates/js/location.js' %}"></script>
+  <script src='https://use.fontawesome.com/faffa271ef.js'></script>
+  <script src='https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/js/bootstrap.min.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
+</body>
+
+</html>
+{% endblock content %}

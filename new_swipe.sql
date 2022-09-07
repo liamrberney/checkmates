@@ -1,0 +1,12 @@
+INSERT INTO swipe(~) VALUES ("?"); 
+CREATE TABLE IF NOT EXISTS swipe2 AS SELECT * FROM (SELECT * FROM (SELECT ROW_NUMBER() OVER(ORDER BY CASE WHEN rowid IS NULL THEN 1 ELSE 0 END) AS rownumber,* FROM swipe) as t1 INNER JOIN (SELECT ROW_NUMBER() OVER(ORDER BY CASE WHEN ~ IS NULL THEN 1 ELSE 0 END) AS rownumber2,~ AS ~2 FROM swipe) as t2 ON t1.rownumber = t2.rownumber2);
+UPDATE swipe2 SET ~=~2;
+ALTER TABLE swipe2 DROP COLUMN ~2;
+ALTER TABLE swipe2 DROP COLUMN rownumber;
+ALTER TABLE swipe2 DROP COLUMN rownumber2;
+DELETE FROM swipe;
+INSERT INTO swipe SELECT * FROM swipe2;
+DROP TABLE swipe2;
+UPDATE swipe SET ~ = NULL WHERE EXISTS (SELECT * FROM swipe AS t2 WHERE swipe.~ = t2.~ and swipe.rowid > t2.rowid);
+DELETE FROM swipe WHERE ~ IS NULL AND rowid = (SELECT MAX(rowid) FROM swipe);
+UPDATE sqlite_sequence SET seq = (SELECT MAX(rowid) FROM swipe) WHERE name="swipe";
